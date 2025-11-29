@@ -42,14 +42,9 @@ public class RoboCompeticaoNormal {
         }
 
         System.out.println("\n=== RESULTADOS ===");
-        System.out.println(r1.getCor() + " → válidos: " + r1.getMovimentosValidos() + " | inválidos: " + r1.getMovimentosInvalidos());
-        System.out.println(r2.getCor() + " → válidos: " + r2.getMovimentosValidos() + " | inválidos: " + r2.getMovimentosInvalidos());
+        System.out.println(r1.getCor() + " = válidos: " + r1.getMovimentosValidos() + " | inválidos: " + r1.getMovimentosInvalidos());
+        System.out.println(r2.getCor() + " = válidos: " + r2.getMovimentosValidos() + " | inválidos: " + r2.getMovimentosInvalidos());
 
         sc.close();
     }
 }
-
-
-
-
-
