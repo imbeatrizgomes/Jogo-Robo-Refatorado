@@ -11,32 +11,89 @@ import entities.RoboInteligente;
 import entities.Rocha;
 
 public class RoboObstaculos {
-    public static void main(String[] args) {
+	
+    private static final Scanner sc = new Scanner(System.in);
 
-        Scanner sc = new Scanner(System.in);
+    private static int comHorizontal;
+    private static int comVertical;
+
+    public static void main(String[] args) {
         MundoRobo mundo = new MundoRobo();
 
         System.out.print("Cor do robô normal: ");
         Robo normal = new Robo(sc.nextLine());
 
         System.out.print("Cor do robô inteligente: ");
-        RoboInteligente intel = new RoboInteligente(sc.nextLine());
+        RoboInteligente inteligente = new RoboInteligente(sc.nextLine());
 
-        int comHorizontal;
-        int comVertical;
-        do {
-        	System.out.print("Digite a posição horizontal X da comida [0–" + (mundo.getTamanhoTabuleiro() - 1) + "]: ");
-            comHorizontal = sc.nextInt();
-            System.out.print("Digite a posição vertical Y da comida [0–" + (mundo.getTamanhoTabuleiro() - 1) + "]: ");
-            comVertical = sc.nextInt();
-        } while (!mundo.posicaoValida(comHorizontal, comVertical));
-
+        lerPosicaoComida(mundo);
         mundo.setComidaX(comHorizontal);
         mundo.setComidaY(comVertical);
-        
+
+        adicionarBombas(mundo, comHorizontal, comVertical);
+        adicionarRochas(mundo, comHorizontal, comVertical);
+
+        while (true) {
+            System.out.println(mundo.gerarVisualizacao(normal, inteligente));
+            FuncoesDoJogo.aguarda(700);
+
+            if (normal.isAtivo()) {
+                moverRobo(mundo, normal);
+
+                if (normal.encontrouComida(comHorizontal, comVertical)) {
+                    System.out.println(mundo.gerarVisualizacao(normal, inteligente));
+                    System.out.println(normal.getCor() + " encontrou o alimento!");
+                    break;
+                }
+
+                if (!normal.isAtivo() && !inteligente.isAtivo()) {
+                    System.out.println(mundo.gerarVisualizacao(normal, inteligente));
+                    System.out.println("Todos os robô explodiram nas bombas!");
+                    break;
+                }
+            }
+
+            if (inteligente.isAtivo()) {
+                moverRobo(mundo, inteligente);
+
+                if (inteligente.encontrouComida(comHorizontal, comVertical)) {
+                    System.out.println(mundo.gerarVisualizacao(normal, inteligente));
+                    System.out.println(inteligente.getCor() + " encontrou o alimento!");
+                    break;
+                }
+
+                if (!normal.isAtivo() && !inteligente.isAtivo()) {
+                    System.out.println(mundo.gerarVisualizacao(normal, inteligente));
+                    System.out.println("Todos os robôs explodiram nas bombas!");
+                    break;
+                }
+            }
+        }
+
+        System.out.println(mundo.gerarVisualizacao(normal, inteligente));
+
+        sc.close();
+    }
+
+    private static void lerPosicaoComida(MundoRobo mundo) {
+        int x;
+        int y;
+        do {
+            System.out.print("Digite a posição horizontal X da comida [0–" + (mundo.getTamanhoTabuleiro() - 1) + "]: ");
+            x = sc.nextInt();
+            System.out.print("Digite a posição vertical Y da comida [0–" + (mundo.getTamanhoTabuleiro() - 1) + "]: ");
+            y = sc.nextInt();
+        } while (!mundo.posicaoValida(x, y));
+        sc.nextLine();
+        comHorizontal = x;
+        comVertical = y;
+    }
+
+    private static void adicionarBombas(MundoRobo mundo, int comidaX, int comidaY) {
         System.out.print("Quantas bombas deseja? ");
-        int qtdBombas = sc.nextInt();
-        for (int i = 0; i < qtdBombas; i++) {
+        int qtd = sc.nextInt();
+        sc.nextLine();
+        for (int i = 0; i < qtd; i++) {
             int bombaHorizontal;
             int bombaVertical;
             do {
@@ -45,13 +102,17 @@ public class RoboObstaculos {
                 bombaHorizontal = sc.nextInt();
                 System.out.print("Digite a posição Y [0–3]: ");
                 bombaVertical = sc.nextInt();
-            } while (!mundo.posicaoValida(bombaHorizontal, bombaVertical) || (bombaHorizontal == comHorizontal && bombaVertical == comVertical));
+                sc.nextLine(); 
+            } while (!mundo.posicaoValida(bombaHorizontal, bombaVertical) || (bombaHorizontal == comidaX && bombaVertical == comidaY));
             mundo.addObstaculo(new Bomba(i, bombaHorizontal, bombaVertical));
         }
+    }
 
+    private static void adicionarRochas(MundoRobo mundo, int comidaX, int comidaY) {
         System.out.print("Quantas rochas deseja? ");
-        int qtdRochas = sc.nextInt();
-        for (int i = 0; i < qtdRochas; i++) {
+        int qtd = sc.nextInt();
+        sc.nextLine(); 
+        for (int i = 0; i < qtd; i++) {
             int rochaHorizontal;
             int rochaVertical;
             do {
@@ -60,50 +121,10 @@ public class RoboObstaculos {
                 rochaHorizontal = sc.nextInt();
                 System.out.print("Digite a posição Y [0–3]: ");
                 rochaVertical = sc.nextInt();
-            } while (!mundo.posicaoValida(rochaHorizontal, rochaVertical) || (rochaHorizontal == comHorizontal && rochaVertical == comVertical));
+                sc.nextLine();
+            } while (!mundo.posicaoValida(rochaHorizontal, rochaVertical) || (rochaHorizontal == comidaX && rochaVertical == comidaY));
             mundo.addObstaculo(new Rocha(i, rochaHorizontal, rochaVertical));
         }
-
-        while (true) {
-            System.out.println(mundo.gerarVisualizacao(normal, intel));
-            FuncoesDoJogo.aguarda(700);
-
-            if (normal.isAtivo()) {
-                moverRobo(mundo, normal);
-
-                if (normal.encontrouComida(comHorizontal, comVertical)) {
-                    System.out.println(mundo.gerarVisualizacao(normal, intel));
-                    System.out.println(normal.getCor() + " encontrou o alimento!");
-                    break;
-                }
-
-                if (!normal.isAtivo() && !intel.isAtivo()) {
-                    System.out.println(mundo.gerarVisualizacao(normal, intel));
-                    System.out.println("Todos os robô explodiram nas bombas!");
-                    break;
-                }
-            }
-
-            if (intel.isAtivo()) {
-                moverRobo(mundo, intel);
-                
-                if (intel.encontrouComida(comHorizontal, comVertical)) {
-                    System.out.println(mundo.gerarVisualizacao(normal, intel));
-                    System.out.println(intel.getCor() + " encontrou o alimento!");
-                    break;
-                }
-
-                if (!normal.isAtivo() && !intel.isAtivo()) {
-                    System.out.println(mundo.gerarVisualizacao(normal, intel));
-                    System.out.println("Todos os robôs explodiram nas bombas!");
-                    break;
-                }
-            }
-
-        }
-
-        System.out.println(mundo.gerarVisualizacao(normal, intel));
-        sc.close();
     }
 
     private static void moverRobo(MundoRobo mundo, Robo robo) {
@@ -118,7 +139,3 @@ public class RoboObstaculos {
         }
     }
 }
-
-
-
-
