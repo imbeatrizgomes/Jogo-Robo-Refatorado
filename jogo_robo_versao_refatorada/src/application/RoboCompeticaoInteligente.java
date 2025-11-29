@@ -22,9 +22,9 @@ public class RoboCompeticaoInteligente {
         int comHorizontal; 
         int comVertical;
         do {
-            System.out.print("Digite a posição horizontal (X) da comida [0–3]: ");
+        	System.out.print("Digite a posição horizontal X da comida [0–" + (mundo.getTamanhodotabuleiro() - 1) + "]: ");
             comHorizontal = sc.nextInt();
-            System.out.print("Digite a posição vertical (Y) da comida [0–3]: ");
+            System.out.print("Digite a posição vertical Y da comida [0–" + (mundo.getTamanhodotabuleiro() - 1) + "]: ");
             comVertical = sc.nextInt();
         } while (!mundo.posicaoValida(comHorizontal, comVertical));
 
