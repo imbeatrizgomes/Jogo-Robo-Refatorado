@@ -16,18 +16,19 @@ public class RoboManual {
         System.out.print("Digite a cor do robô: ");
         Robo robo = new Robo(sc.nextLine());
 
-        int comX, comY;
+        int comHorizontal;
+        int comVertical;
         do {
             System.out.print("Digite a posição horizontal X da comida [0–" + (mundo.getTamanho() - 1) + "]: ");
-            comX = sc.nextInt();
+            comHorizontal = sc.nextInt();
             System.out.print("Digite a posição vertical Y da comida [0–" + (mundo.getTamanho() - 1) + "]: ");
-            comY = sc.nextInt();
-        } while (!mundo.posicaoValida(comX, comY));
+            comVertical = sc.nextInt();
+        } while (!mundo.posicaoValida(comHorizontal, comVertical));
 
-        mundo.setComidaX(comX);
-        mundo.setComidaY(comY);
+        mundo.setComidaX(comHorizontal);
+        mundo.setComidaY(comVertical);
 
-        while (!robo.encontrouComida(comX, comY)) {
+        while (!robo.encontrouComida(comHorizontal, comVertical)) {
             System.out.println(mundo.gerarVisualizacao(robo));
             System.out.println("1 - Up");
             System.out.println("2 - Down");
@@ -47,7 +48,7 @@ public class RoboManual {
                 System.out.println(exception.getMessage());
             }
 
-            FuncoesDoJogo.aguarda(100); // pequena pausa para melhor experiência no console
+            FuncoesDoJogo.aguarda(100);
         }
 
         System.out.println(mundo.gerarVisualizacao(robo));
@@ -59,3 +60,4 @@ public class RoboManual {
         sc.close();
     }
 }
+
