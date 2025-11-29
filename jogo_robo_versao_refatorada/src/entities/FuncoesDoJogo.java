@@ -1,6 +1,10 @@
 package entities;
 
 public final class FuncoesDoJogo {
+	
+	private FuncoesDoJogo() {
+		
+	}
 
     public static void aguarda(int tempoMs) {
         try {
