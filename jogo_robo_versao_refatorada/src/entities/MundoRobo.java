@@ -1,13 +1,13 @@
 package entities;
 
 public class MundoRobo {
-    private static final int tamanho = DimensaoTabuleiro.SIZE;
+    private static final int tamanhoDoTabuleiro = DimensaoTabuleiro.SIZE;
     private int comidaX;
     private int comidaY;
-    private Obstaculo[][] obstaculos = new Obstaculo[tamanho][tamanho];
+    private Obstaculo[][] obstaculos = new Obstaculo[tamanhoDoTabuleiro][tamanhoDoTabuleiro];
 
     public boolean posicaoValida(int x, int y) {
-        return x >= 0 && x < tamanho && y >= 0 && y < tamanho;
+        return x >= 0 && x < tamanhoDoTabuleiro && y >= 0 && y < tamanhoDoTabuleiro;
     }
 
     public void addObstaculo(Obstaculo obstaculo) {
@@ -34,8 +34,8 @@ public class MundoRobo {
     public String gerarVisualizacao(Robo robo) {
         StringBuilder sb = new StringBuilder("\n");
 
-        for (int y = tamanho - 1; y >= 0; y--) {
-            for (int x = 0; x < tamanho; x++) {
+        for (int y = tamanhoDoTabuleiro - 1; y >= 0; y--) {
+            for (int x = 0; x < tamanhoDoTabuleiro; x++) {
 
                 boolean roboAqui = robo.isAtivo() &&
                                    robo.getX() == x &&
@@ -67,8 +67,8 @@ public class MundoRobo {
     public String gerarVisualizacao(Robo robo1, Robo robo2) {
         StringBuilder sb = new StringBuilder("\n");
 
-        for (int y = tamanho - 1; y >= 0; y--) {
-            for (int x = 0; x < tamanho; x++) {
+        for (int y = tamanhoDoTabuleiro - 1; y >= 0; y--) {
+            for (int x = 0; x < tamanhoDoTabuleiro; x++) {
 
                 boolean robo1Aqui = robo1.isAtivo() &&
                                     robo1.getX() == x &&
@@ -122,8 +122,7 @@ public class MundoRobo {
     public void setComidaY(int comidaY) { 
     	this.comidaY = comidaY;
     }
-    public int getTamanho() { 
-    	return tamanho;
+    public int getTamanhodotabuleiro() { 
+    	return tamanhoDoTabuleiro;
     }
 }
-
