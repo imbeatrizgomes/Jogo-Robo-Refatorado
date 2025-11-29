@@ -72,6 +72,16 @@ public class RoboObstaculos {
 
         System.out.println(mundo.gerarVisualizacao(normal, inteligente));
 
+        System.out.println("\n=== RESULTADOS ===");
+        System.out.println(normal.getCor() + " = válidos: " 
+                           + normal.getMovimentosValidos()
+                           + " | inválidos: " 
+                           + normal.getMovimentosInvalidos());
+        System.out.println(inteligente.getCor() + " = válidos: " 
+                           + inteligente.getMovimentosValidos()
+                           + " | inválidos: " 
+                           + inteligente.getMovimentosInvalidos());
+
         sc.close();
     }
 
@@ -128,7 +138,7 @@ public class RoboObstaculos {
     }
 
     private static void moverRobo(MundoRobo mundo, Robo robo) {
-       if (!robo.isAtivo()) {
+        if (!robo.isAtivo()) {
         	return;
         }
 
@@ -141,4 +151,3 @@ public class RoboObstaculos {
         }
     }
 }
-
