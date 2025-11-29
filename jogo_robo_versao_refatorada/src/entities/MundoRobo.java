@@ -1,13 +1,13 @@
 package entities;
 
 public class MundoRobo {
-    private static final int tamanhoDoTabuleiro = DimensaoTabuleiro.SIZE;
+    private static final int TAMANHO_TABULEIRO = DimensaoTabuleiro.SIZE;
     private int comidaX;
     private int comidaY;
-    private Obstaculo[][] obstaculos = new Obstaculo[tamanhoDoTabuleiro][tamanhoDoTabuleiro];
+    private Obstaculo[][] obstaculos = new Obstaculo[TAMANHO_TABULEIRO ][TAMANHO_TABULEIRO ];
 
     public boolean posicaoValida(int x, int y) {
-        return x >= 0 && x < tamanhoDoTabuleiro && y >= 0 && y < tamanhoDoTabuleiro;
+        return x >= 0 && x < TAMANHO_TABULEIRO && y >= 0 && y < TAMANHO_TABULEIRO ;
     }
 
     public void addObstaculo(Obstaculo obstaculo) {
@@ -34,8 +34,8 @@ public class MundoRobo {
     public String gerarVisualizacao(Robo robo) {
         StringBuilder sb = new StringBuilder("\n");
 
-        for (int y = tamanhoDoTabuleiro - 1; y >= 0; y--) {
-            for (int x = 0; x < tamanhoDoTabuleiro; x++) {
+        for (int y = TAMANHO_TABULEIRO  - 1; y >= 0; y--) {
+            for (int x = 0; x < TAMANHO_TABULEIRO ; x++) {
 
                 boolean roboAqui = robo.isAtivo() &&
                                    robo.getX() == x &&
@@ -67,8 +67,8 @@ public class MundoRobo {
     public String gerarVisualizacao(Robo robo1, Robo robo2) {
         StringBuilder sb = new StringBuilder("\n");
 
-        for (int y = tamanhoDoTabuleiro - 1; y >= 0; y--) {
-            for (int x = 0; x < tamanhoDoTabuleiro; x++) {
+        for (int y = TAMANHO_TABULEIRO  - 1; y >= 0; y--) {
+            for (int x = 0; x < TAMANHO_TABULEIRO ; x++) {
 
                 boolean robo1Aqui = robo1.isAtivo() &&
                                     robo1.getX() == x &&
@@ -122,7 +122,7 @@ public class MundoRobo {
     public void setComidaY(int comidaY) { 
     	this.comidaY = comidaY;
     }
-    public int getTamanhodotabuleiro() { 
-    	return tamanhoDoTabuleiro;
+    public int getTAMANHO_TABULEIRO() { 
+    	return TAMANHO_TABULEIRO ;
     }
 }
