@@ -19,16 +19,17 @@ public class RoboCompeticaoInteligente {
         System.out.print("Cor do robô inteligente: ");
         RoboInteligente intel = new RoboInteligente(sc.nextLine());
 
-        int cx, cy;
+        int comHorizontal; 
+        int comVertical;
         do {
             System.out.print("Digite a posição horizontal (X) da comida [0–3]: ");
-            cx = sc.nextInt();
+            comHorizontal = sc.nextInt();
             System.out.print("Digite a posição vertical (Y) da comida [0–3]: ");
-            cy = sc.nextInt();
-        } while (!mundo.posicaoValida(cx, cy));
+            comVertical = sc.nextInt();
+        } while (!mundo.posicaoValida(comHorizontal, comVertical));
 
-        mundo.setComidaX(cx);
-        mundo.setComidaY(cy);
+        mundo.setComidaX(comHorizontal);
+        mundo.setComidaY(comVertical);
 
         boolean normalComeu = false;
         boolean intelComeu = false;
@@ -40,7 +41,7 @@ public class RoboCompeticaoInteligente {
 
             if (!normalComeu && normal.isAtivo()) {
                 FuncoesDoJogo.moverAleatorio(normal);
-                if (normal.encontrouComida(cx, cy)) {
+                if (normal.encontrouComida(comHorizontal, comVertical)) {
                     normalComeu = true;
                     System.out.println(normal.getCor() + " encontrou o alimento!");
                 }
@@ -48,7 +49,7 @@ public class RoboCompeticaoInteligente {
 
             if (!intelComeu && intel.isAtivo()) {
                 FuncoesDoJogo.moverAleatorio(intel);
-                if (intel.encontrouComida(cx, cy)) {
+                if (intel.encontrouComida(comHorizontal, comVertical)) {
                     intelComeu = true;
                     System.out.println(intel.getCor() + " encontrou o alimento!");
                 }
