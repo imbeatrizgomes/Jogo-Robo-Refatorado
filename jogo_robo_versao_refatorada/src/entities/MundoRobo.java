@@ -2,7 +2,8 @@ package entities;
 
 public class MundoRobo {
     private final int tamanho = DimensaoTabuleiro.SIZE;
-    private int comidaX, comidaY;
+    private int comidaX;
+    private int comidaY;
     private Obstaculo[][] obstaculos = new Obstaculo[tamanho][tamanho];
 
     public boolean posicaoValida(int x, int y) {
