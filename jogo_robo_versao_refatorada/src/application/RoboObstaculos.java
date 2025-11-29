@@ -25,9 +25,9 @@ public class RoboObstaculos {
         int comHorizontal;
         int comVertical;
         do {
-        	 System.out.print("Digite a posição horizontal X da comida [0–" + (mundo.getTAMANHO_TABULEIRO() - 1) + "]: ");
+        	System.out.print("Digite a posição horizontal X da comida [0–" + (mundo.getTamanhoTabuleiro() - 1) + "]: ");
             comHorizontal = sc.nextInt();
-            System.out.print("Digite a posição vertical Y da comida [0–" + (mundo.getTAMANHO_TABULEIRO() - 1) + "]: ");
+            System.out.print("Digite a posição vertical Y da comida [0–" + (mundo.getTamanhoTabuleiro() - 1) + "]: ");
             comVertical = sc.nextInt();
         } while (!mundo.posicaoValida(comHorizontal, comVertical));
 
@@ -118,5 +118,6 @@ public class RoboObstaculos {
         }
     }
 }
+
 
 
