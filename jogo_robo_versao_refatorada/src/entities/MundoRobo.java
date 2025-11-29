@@ -122,8 +122,7 @@ public class MundoRobo {
     public void setComidaY(int comidaY) { 
     	this.comidaY = comidaY;
     }
-    public int getTAMANHO_TABULEIRO() { 
-    	return TAMANHO_TABULEIRO ;
+    public int getTamanhoTabuleiro() {
+        return TAMANHO_TABULEIRO;
     }
 }
-
