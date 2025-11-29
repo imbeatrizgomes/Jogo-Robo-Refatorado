@@ -1,7 +1,7 @@
 package entities;
 
 public class MundoRobo {
-    private final int tamanho = DimensaoTabuleiro.SIZE;
+    private static final int tamanho = DimensaoTabuleiro.SIZE;
     private int comidaX;
     private int comidaY;
     private Obstaculo[][] obstaculos = new Obstaculo[tamanho][tamanho];
@@ -126,3 +126,4 @@ public class MundoRobo {
     	return tamanho;
     }
 }
+
