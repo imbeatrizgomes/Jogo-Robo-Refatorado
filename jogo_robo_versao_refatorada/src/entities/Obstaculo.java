@@ -5,7 +5,7 @@ public abstract class Obstaculo {
     protected int x;
     protected int y;
 
-    public Obstaculo(int id, int posicaoHorizontal, int posicaoVertical) {
+    protected Obstaculo(int id, int posicaoHorizontal, int posicaoVertical) {
         this.id = id;
         this.x = posicaoHorizontal;
         this.y = posicaoVertical;
@@ -34,3 +34,4 @@ public abstract class Obstaculo {
     	this.y = y; 
     }
 }
+
