@@ -19,7 +19,7 @@ public class RoboCompeticaoInteligente {
         System.out.print("Cor do robô inteligente: ");
         RoboInteligente intel = new RoboInteligente(sc.nextLine());
 
-        int comHorizontal; 
+        int comHorizontal;
         int comVertical;
         do {
             System.out.print("Digite a posição horizontal (X) da comida [0–3]: ");
@@ -38,31 +38,33 @@ public class RoboCompeticaoInteligente {
 
             System.out.println(mundo.gerarVisualizacao(normal, intel));
             FuncoesDoJogo.aguarda(700);
-
+            
             if (!normalComeu && normal.isAtivo()) {
-                FuncoesDoJogo.moverAleatorio(normal);
-                if (normal.encontrouComida(comHorizontal, comVertical)) {
-                    normalComeu = true;
+                normalComeu = moverEVerificar(normal, mundo, comHorizontal, comVertical);
+                if (normalComeu) {
                     System.out.println(normal.getCor() + " encontrou o alimento!");
                 }
             }
 
             if (!intelComeu && intel.isAtivo()) {
-                FuncoesDoJogo.moverAleatorio(intel);
-                if (intel.encontrouComida(comHorizontal, comVertical)) {
-                    intelComeu = true;
+                intelComeu = moverEVerificar(intel, mundo, comHorizontal, comVertical);
+                if (intelComeu) {
                     System.out.println(intel.getCor() + " encontrou o alimento!");
                 }
             }
+        }
 
-            if (!normal.isAtivo() && !intel.isAtivo()) {
-                System.out.println("Ambos ficaram inativos!");
-                break;
-            }
+        if (normalComeu && intelComeu) {
+            System.out.println("Ambos os robôs encontraram o alimento!");
         }
 
         System.out.println(mundo.gerarVisualizacao(normal, intel));
 
         sc.close();
+    }
+    
+    private static boolean moverEVerificar(Robo robo, MundoRobo mundo, int comidaX, int comidaY) {
+        FuncoesDoJogo.moverAleatorio(robo);
+        return robo.encontrouComida(comidaX, comidaY);
     }
 }
