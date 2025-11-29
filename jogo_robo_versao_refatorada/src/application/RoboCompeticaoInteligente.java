@@ -17,7 +17,7 @@ public class RoboCompeticaoInteligente {
         Robo normal = new Robo(sc.nextLine());
 
         System.out.print("Cor do robô inteligente: ");
-        RoboInteligente intel = new RoboInteligente(sc.nextLine());
+        RoboInteligente inteligente = new RoboInteligente(sc.nextLine());
 
         int comHorizontal;
         int comVertical;
@@ -36,35 +36,35 @@ public class RoboCompeticaoInteligente {
 
         while (!normalComeu || !intelComeu) {
 
-            System.out.println(mundo.gerarVisualizacao(normal, intel));
+            System.out.println(mundo.gerarVisualizacao(normal, inteligente));
             FuncoesDoJogo.aguarda(700);
 
             if (!normalComeu && normal.isAtivo()) {
-                normalComeu = moverEVerificar(normal, comHorizontal, comVertical);
-                if (normalComeu) {
-                    System.out.println(normal.getCor() + " encontrou o alimento!");
-                }
+                normalComeu = tentarMoverEVerificar(normal, comHorizontal, comVertical);
             }
 
-            if (!intelComeu && intel.isAtivo()) {
-                intelComeu = moverEVerificar(intel, comHorizontal, comVertical);
-                if (intelComeu) {
-                    System.out.println(intel.getCor() + " encontrou o alimento!");
-                }
+            if (!intelComeu && inteligente.isAtivo()) {
+                intelComeu = tentarMoverEVerificar(inteligente, comHorizontal, comVertical);
             }
 
             if (normalComeu && intelComeu) {
                 System.out.println("Ambos os robôs encontraram o alimento!");
+                break;
             }
         }
 
-        System.out.println(mundo.gerarVisualizacao(normal, intel));
+        System.out.println(mundo.gerarVisualizacao(normal, inteligente));
 
         sc.close();
     }
 
-    private static boolean moverEVerificar(Robo robo, int comidaX, int comidaY) {
+    private static boolean tentarMoverEVerificar(Robo robo, int comidaX, int comidaY) {
         FuncoesDoJogo.moverAleatorio(robo);
-        return robo.encontrouComida(comidaX, comidaY);
+        if (robo.encontrouComida(comidaX, comidaY)) {
+            System.out.println(robo.getCor() + " encontrou o alimento!");
+            return true;
+        }
+        return false;
     }
+
 }
