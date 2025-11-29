@@ -128,7 +128,9 @@ public class RoboObstaculos {
     }
 
     private static void moverRobo(MundoRobo mundo, Robo robo) {
-        if (!robo.isAtivo()) return;
+       if (!robo.isAtivo()) {
+        	return;
+        }
 
         FuncoesDoJogo.moverAleatorio(robo);
 
@@ -139,3 +141,4 @@ public class RoboObstaculos {
         }
     }
 }
+
