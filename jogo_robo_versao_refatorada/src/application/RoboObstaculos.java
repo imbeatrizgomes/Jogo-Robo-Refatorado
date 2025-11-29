@@ -37,29 +37,31 @@ public class RoboObstaculos {
         System.out.print("Quantas bombas deseja? ");
         int qtdBombas = sc.nextInt();
         for (int i = 0; i < qtdBombas; i++) {
-            int bx, by;
+            int bombaHorizontal;
+            int bombaVertical;
             do {
                 System.out.println("Bomba " + (i + 1));
                 System.out.print("Digite a posição X [0–3]: ");
-                bx = sc.nextInt();
+                bombaHorizontal = sc.nextInt();
                 System.out.print("Digite a posição Y [0–3]: ");
-                by = sc.nextInt();
-            } while (!mundo.posicaoValida(bx, by) || (bx == comHorizontal && by == comVertical));
-            mundo.addObstaculo(new Bomba(i, bx, by));
+                bombaVertical = sc.nextInt();
+            } while (!mundo.posicaoValida(bombaHorizontal, bombaVertical) || (bombaHorizontal == comHorizontal && bombaVertical == comVertical));
+            mundo.addObstaculo(new Bomba(i, bombaHorizontal, bombaVertical));
         }
 
         System.out.print("Quantas rochas deseja? ");
         int qtdRochas = sc.nextInt();
         for (int i = 0; i < qtdRochas; i++) {
-            int rx, ry;
+            int rochaHorizontal;
+            int rochaVertical;
             do {
                 System.out.println("Rocha " + (i + 1));
                 System.out.print("Digite a posição X [0–3]: ");
-                rx = sc.nextInt();
+                rochaHorizontal = sc.nextInt();
                 System.out.print("Digite a posição Y [0–3]: ");
-                ry = sc.nextInt();
-            } while (!mundo.posicaoValida(rx, ry) || (rx == comHorizontal && ry == comVertical));
-            mundo.addObstaculo(new Rocha(i, rx, ry));
+                rochaVertical = sc.nextInt();
+            } while (!mundo.posicaoValida(rochaHorizontal, rochaVertical) || (rochaHorizontal == comHorizontal && rochaVertical == comVertical));
+            mundo.addObstaculo(new Rocha(i, rochaHorizontal, rochaVertical));
         }
 
         while (true) {
