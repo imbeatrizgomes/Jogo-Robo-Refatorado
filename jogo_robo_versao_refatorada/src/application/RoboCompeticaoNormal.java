@@ -18,26 +18,27 @@ public class RoboCompeticaoNormal {
         System.out.print("Digite a cor do robô 2: ");
         Robo r2 = new Robo(sc.nextLine());
 
-        int cx, cy;
+        int comHorizontal;
+        int comVertical;
         do {
         	System.out.print("Digite a posição horizontal (X) da comida [0–3]: ");
-            cx = sc.nextInt();
+            comHorizontal = sc.nextInt();
             System.out.print("Digite a posição vertical (Y) da comida [0–3]: ");
-            cy = sc.nextInt();
-        } while (!mundo.posicaoValida(cx, cy));
+            comVertical = sc.nextInt();
+        } while (!mundo.posicaoValida(comHorizontal, comVertical));
 
-        mundo.setComidaX(cx);
-        mundo.setComidaY(cy);
+        mundo.setComidaX(comHorizontal);
+        mundo.setComidaY(comVertical);
 
         while (true) {
             System.out.println(mundo.gerarVisualizacao(r1, r2));
             FuncoesDoJogo.aguarda(700);
 
             FuncoesDoJogo.moverAleatorio(r1);
-            if (r1.encontrouComida(cx, cy)) break;
+            if (r1.encontrouComida(comHorizontal, comVertical)) break;
 
             FuncoesDoJogo.moverAleatorio(r2);
-            if (r2.encontrouComida(cx, cy)) break;
+            if (r2.encontrouComida(comHorizontal, comVertical)) break;
         }
 
         System.out.println("\n=== RESULTADOS ===");
