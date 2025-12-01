@@ -35,10 +35,14 @@ public class RoboCompeticaoNormal {
             FuncoesDoJogo.aguarda(700);
 
             FuncoesDoJogo.moverAleatorio(r1);
-            if (r1.encontrouComida(comHorizontal, comVertical)) break;
+            if (r1.encontrouComida(comHorizontal, comVertical)) {
+            	break;
+            }
 
             FuncoesDoJogo.moverAleatorio(r2);
-            if (r2.encontrouComida(comHorizontal, comVertical)) break;
+            if (r2.encontrouComida(comHorizontal, comVertical)) {
+            	break;
+            }
         }
 
         System.out.println("\n=== RESULTADOS ===");
